@@ -4,13 +4,13 @@ public class command_injection {
 
 private String executeSystemCommand_Unsafe(HttpServletRequest request) 
 		throws ServletException, IOException {
-	String commandResult = ""; 
+	String commandResult = "" ; 
 	
 	String userCommand = request.getParameter("Command");
   
 	try {
-		Runtime runtime = Runtime.getRuntime();
-		Process subProc = runtime.exec("/bin/sh -c \"" + PROGRAM_NAME + " " + userCommand+"\"");
+		Runtime runtime =  Runtime.getRuntime();
+		Process subProc =  runtime.exec("/bin/sh -c \"" + PROGRAM_NAME + " " + userCommand+"\"");
 		
 		BufferedReader irProcOutput = new BufferedReader(new InputStreamReader(subProc.getInputStream()));
 
