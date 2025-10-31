@@ -1,4 +1,6 @@
-//java command injectoin
+//java command injection
+
+public class command_injection {
 
 private String executeSystemCommand_Unsafe(HttpServletRequest request) 
 		throws ServletException, IOException {
@@ -22,4 +24,6 @@ private String executeSystemCommand_Unsafe(HttpServletRequest request)
 	}
 	
 	return commandResult;
+}
+
 }
