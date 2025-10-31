@@ -1,29 +1,16 @@
 //java command injection
 
-public class command_injection {
 
-private String executeSystemCommand_Unsafe(HttpServletRequest request) 
-		throws ServletException, IOException {
-	String commandResult = "" ; 
-	
-	String userCommand = request.getParameter("Command");
-  
-	try {
-		Runtime runtime =  Runtime.getRuntime();
-		Process subProc =  runtime.exec("/bin/sh -c \"" + PROGRAM_NAME + " " + userCommand+"\"");
-		
-		BufferedReader irProcOutput = new BufferedReader(new InputStreamReader(subProc.getInputStream()));
+import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.autoconfigure.*;
 
-		String line = null;
-        while ((line = irProcOutput.readLine()) != null)
-			commandResult += line; 
+import java.io.Serializable;
 
-		irProcOutput.close();		
-	} catch (Exception ex) {
-		handleExceptions(ex);
-	}
-	
-	return commandResult;
-}
-
+@RestController
+@EnableAutoConfiguration
+public class CowController {
+    @RequestMapping(value = "/cowsay")
+    String cowsay(@RequestParam(defaultValue = "I love Linux!") String input) {
+        return Cowsay.run(input);
+    }
 }
